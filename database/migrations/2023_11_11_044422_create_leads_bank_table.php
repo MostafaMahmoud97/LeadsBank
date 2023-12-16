@@ -59,12 +59,12 @@ return new class extends Migration
 
             $table->integer("rate");
             $table->timestamp("last_time_communicated")->nullable();
-            $table->enum("transaction_type",['commission based','immediate']);
-            $table->double('price_percentage');
-            $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
-            $table->enum("commission_type",['shared','exclusive'])->nullable();
-            $table->text("description")->default("")->nullable();
-            $table->boolean("is_archive")->default(1);
+//            $table->enum("transaction_type",['commission based','immediate']);
+//            $table->double('price_percentage');
+//            $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
+//            $table->enum("commission_type",['shared','exclusive'])->nullable();
+//            $table->text("description")->default("")->nullable();
+//            $table->boolean("is_archive")->default(1);
 
 
 
