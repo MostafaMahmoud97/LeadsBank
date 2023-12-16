@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('immediate_carts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("leads_bank_id");
-            $table->unsignedBigInteger("invoice_id")->default(0);
-            $table->unsignedBigInteger("client_id");
-            $table->text('description')->default("Buy lead from leads Bank immediate");
-            $table->integer('quantity')->default(1);
+//            $table->unsignedBigInteger("leads_bank_id");
+//            $table->unsignedBigInteger("invoice_id")->default(0);
+//            $table->unsignedBigInteger("client_id");
+//            $table->text('description')->default("Buy lead from leads Bank immediate");
+//            $table->integer('quantity')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });
