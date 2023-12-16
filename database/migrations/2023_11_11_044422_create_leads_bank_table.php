@@ -34,13 +34,15 @@ return new class extends Migration
             $table->string('unit')->default("")->nullable();
             $table->foreignId('country_id');
             $table->foreignId('state_id');
-//            $table->foreignId('city_id');
-//            $table->string('county')->default("")->nullable();
-//            $table->enum('citizenship_status', ['US_CITIZEN','LAWFUL_PERMANENT_RESIDENT_ALIEN','OTHER'])->nullable();
-//            $table->enum('home_occupancy', ['PRIMARY','SECONDARY','INVESTMENT','OTHER'])->nullable();
-//            $table->boolean('is_active')->default(1);
-//            $table->boolean('is_hoa')->default(1);
-//            $table->string('days')->default(0);
+
+            $table->foreignId('city_id');
+            $table->string('county')->default("")->nullable();
+            $table->enum('citizenship_status', ['US_CITIZEN','LAWFUL_PERMANENT_RESIDENT_ALIEN','OTHER'])->nullable();
+            $table->enum('home_occupancy', ['PRIMARY','SECONDARY','INVESTMENT','OTHER'])->nullable();
+            $table->boolean('is_active')->default(1);
+            $table->boolean('is_hoa')->default(1);
+            $table->string('days')->default(0);
+
 //            $table->enum('status',['hot','warm','neutral','cold','frozen','back_to_leads_bank','client'])->default('hot');
 //            $table->enum('sort_status',[1,2,3,4,5,6,7])->default(1);
 //            $table->enum('source',['manual','call_center','apn'])->default('manual');
