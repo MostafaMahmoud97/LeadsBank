@@ -19,21 +19,21 @@ return new class extends Migration
             $table->enum('customer_type',['residential','commercial']);
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('phone')->nullable();
+            $table->string('phone')->default("")->nullable();
             $table->boolean('is_phone_receives_txt');
             $table->string('mobile');
             $table->boolean('is_mobile_receives_txt');
-            $table->string('email')->nullable();
+            $table->string('email')->default("")->nullable();
             $table->string('preferred_language');
-            $table->string('location')->nullable();
-            $table->decimal('lat', 17,15)->nullable();
-            $table->decimal('lng', 17,14)->nullable();
+            $table->string('location')->default("")->nullable();
+            $table->decimal('lat', 17,15)->default(0)->nullable();
+            $table->decimal('lng', 17,14)->default(0)->nullable();
             $table->string('street');
-            $table->string('unit')->nullable();
+            $table->string('unit')->default("")->nullable();
             $table->foreignId('country_id');
             $table->foreignId('state_id');
             $table->foreignId('city_id');
-            $table->string('county')->nullable();
+            $table->string('county')->default("")->nullable();
             $table->enum('citizenship_status', ['US_CITIZEN','LAWFUL_PERMANENT_RESIDENT_ALIEN','OTHER'])->nullable();
             $table->enum('home_occupancy', ['PRIMARY','SECONDARY','INVESTMENT','OTHER'])->nullable();
             $table->boolean('is_active')->default(1);
@@ -43,8 +43,8 @@ return new class extends Migration
             $table->enum('sort_status',[1,2,3,4,5,6,7])->default(1);
             $table->enum('source',['manual','call_center','apn'])->default('manual');
             $table->timestamp('modified_at')->nullable();
-            $table->string('company_name')->nullable();
-            $table->string('company_business_model')->nullable();
+            $table->string('company_name')->default("")->nullable();
+            $table->string('company_business_model')->default("")->nullable();
             $table->enum('building_type',['single_family','residence','trailer','town_home']);
             $table->string('time_to_contact', 255);
             $table->enum('way_to_contact',['phone','email']);
@@ -59,7 +59,7 @@ return new class extends Migration
             $table->double('price_percentage');
             $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
             $table->enum("commission_type",['shared','exclusive'])->nullable();
-            $table->text("description")->default("");
+            $table->text("description")->default("")->nullable();
             $table->boolean("is_archive")->default(1);
 
 
