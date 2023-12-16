@@ -63,7 +63,7 @@ return new class extends Migration
             $table->double('price_percentage');
             $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
             $table->enum("commission_type",['shared','exclusive'])->nullable();
-            $table->text("description")->default("");
+            $table->text("description");
             $table->boolean("is_archive")->default(1);
 
 
