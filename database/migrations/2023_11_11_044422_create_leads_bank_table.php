@@ -18,12 +18,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->enum('customer_type',['residential','commercial']);
             $table->string('first_name');
-//            $table->string('last_name');
-//            $table->string('phone')->default("")->nullable();
-//            $table->boolean('is_phone_receives_txt');
-//            $table->string('mobile');
-//            $table->boolean('is_mobile_receives_txt');
-//            $table->string('email')->default("")->nullable();
+
+            $table->string('last_name');
+            $table->string('phone')->default("")->nullable();
+            $table->boolean('is_phone_receives_txt');
+            $table->string('mobile');
+            $table->boolean('is_mobile_receives_txt');
+            $table->string('email')->default("")->nullable();
 //            $table->string('preferred_language');
 //            $table->string('location')->default("")->nullable();
 //            $table->decimal('lat', 17,15)->default(0)->nullable();
