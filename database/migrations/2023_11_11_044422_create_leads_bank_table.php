@@ -25,14 +25,15 @@ return new class extends Migration
             $table->string('mobile');
             $table->boolean('is_mobile_receives_txt');
             $table->string('email')->default("")->nullable();
-//            $table->string('preferred_language');
-//            $table->string('location')->default("")->nullable();
-//            $table->decimal('lat', 17,15)->default(0)->nullable();
-//            $table->decimal('lng', 17,14)->default(0)->nullable();
-//            $table->string('street');
-//            $table->string('unit')->default("")->nullable();
-//            $table->foreignId('country_id');
-//            $table->foreignId('state_id');
+
+            $table->string('preferred_language');
+            $table->string('location')->default("")->nullable();
+            $table->decimal('lat', 17,15)->default(0)->nullable();
+            $table->decimal('lng', 17,14)->default(0)->nullable();
+            $table->string('street');
+            $table->string('unit')->default("")->nullable();
+            $table->foreignId('country_id');
+            $table->foreignId('state_id');
 //            $table->foreignId('city_id');
 //            $table->string('county')->default("")->nullable();
 //            $table->enum('citizenship_status', ['US_CITIZEN','LAWFUL_PERMANENT_RESIDENT_ALIEN','OTHER'])->nullable();
