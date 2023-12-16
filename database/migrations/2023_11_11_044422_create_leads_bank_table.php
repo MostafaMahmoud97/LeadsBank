@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('leads_bank', function (Blueprint $table) {
             $table->id();
-//            $table->unsignedBigInteger('user_id');
-//            $table->enum('customer_type',['residential','commercial']);
-//            $table->string('first_name');
+            $table->unsignedBigInteger('user_id');
+            $table->enum('customer_type',['residential','commercial']);
+            $table->string('first_name');
 //            $table->string('last_name');
 //            $table->string('phone')->default("")->nullable();
 //            $table->boolean('is_phone_receives_txt');
