@@ -51,11 +51,11 @@ return new class extends Migration
             $table->string('company_business_model')->default("")->nullable();
             $table->enum('building_type',['single_family','residence','trailer','town_home']);
             $table->string('time_to_contact', 255);
-//            $table->enum('way_to_contact',['phone','email']);
-//            $table->enum('lead_type',['lead_guaranteed','self_generated'])->default('lead_guaranteed');
-//            $table->boolean('is_decision_maker_present')->default(1);
-//            $table->enum('house_ownership',['rental','owner','house_ownership'])->default('owner');
-//            $table->string('zip_code');
+            $table->enum('way_to_contact',['phone','email']);
+            $table->enum('lead_type',['lead_guaranteed','self_generated'])->default('lead_guaranteed');
+            $table->boolean('is_decision_maker_present')->default(1);
+            $table->enum('house_ownership',['rental','owner','house_ownership'])->default('owner');
+            $table->string('zip_code');
 //
 //            $table->integer("rate");
 //            $table->timestamp("last_time_communicated")->nullable();
