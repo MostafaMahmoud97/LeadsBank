@@ -56,15 +56,15 @@ return new class extends Migration
             $table->boolean('is_decision_maker_present')->default(1);
             $table->enum('house_ownership',['rental','owner','house_ownership'])->default('owner');
             $table->string('zip_code');
-//
-//            $table->integer("rate");
-//            $table->timestamp("last_time_communicated")->nullable();
-//            $table->enum("transaction_type",['commission based','immediate']);
-//            $table->double('price_percentage');
-//            $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
-//            $table->enum("commission_type",['shared','exclusive'])->nullable();
-//            $table->text("description")->default("")->nullable();
-//            $table->boolean("is_archive")->default(1);
+
+            $table->integer("rate");
+            $table->timestamp("last_time_communicated")->nullable();
+            $table->enum("transaction_type",['commission based','immediate']);
+            $table->double('price_percentage');
+            $table->enum("commission_based",['flat rate','split earning','percentage of sale'])->nullable();
+            $table->enum("commission_type",['shared','exclusive'])->nullable();
+            $table->text("description")->default("")->nullable();
+            $table->boolean("is_archive")->default(1);
 
 
 
