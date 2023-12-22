@@ -7,7 +7,7 @@ use \App\Http\Controllers\CountryController;
 use \App\Http\Controllers\StateController;
 use \App\Http\Controllers\LeadsBankController;
 use \App\Http\Controllers\CRMController;
-use \App\Http\Controllers\PayPalController;
+use \App\Http\Controllers\CheckOutController;
 
 Route::post("register-user",[UserController::class,"registerUser"]);
 Route::post("login",[UserController::class,"login"]);
@@ -53,12 +53,7 @@ Route::group(["prefix" => "crm","middleware" => "check-api"],function (){
     Route::post("/remove-lead-in-cart",[CRMController::class,"removeLeadFromCart"]);
 });
 
-Route::group(["prefix" => "paypal"],function (){
-    Route::group(["middleware" => "check-api"],function (){
-        Route::post("/check-out",[PayPalController::class,"checkOut"]);
-    });
-    Route::group(["prefix" => "paypal-callback"],function (){
-        Route::get("/success",[PayPalController::class,"success"]);
-        Route::get("/cancel",[PayPalController::class,"cancel"]);
-    });
+Route::group(["prefix" => "pay-leads","middleware" => "check-api"],function (){
+    Route::post("/check-out",[CheckOutController::class,"checkOut"]);
+    Route::post("/create-client",[CheckOutController::class,"CreateClients"]);
 });

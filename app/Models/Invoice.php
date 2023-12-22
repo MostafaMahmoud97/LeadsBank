@@ -13,7 +13,7 @@ class Invoice extends Model
     protected $fillable = [
         'id',
         'client_id',
-        'total_price',
+        'total_coins',
         'status'
     ];
 
@@ -24,9 +24,5 @@ class Invoice extends Model
 
     public function ImmediateCarts(){
         return $this->hasMany(ImmediateCart::class,"invoice_id","id");
-    }
-
-    public function Transaction(){
-        return $this->hasOne(Transaction::class,"invoice_id","id");
     }
 }

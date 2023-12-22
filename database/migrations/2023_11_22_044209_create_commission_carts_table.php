@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("leads_bank_id");
             $table->unsignedBigInteger("client_id");
+            $table->boolean("is_take")->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

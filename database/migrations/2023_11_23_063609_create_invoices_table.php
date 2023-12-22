@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
-            $table->double('total_price')->default(0);
-            $table->enum('status',['pending','canceled','success'])->default('pending');
+            $table->double('total_coins')->default(0);
+            $table->string('status')->default('success');
             $table->softDeletes();
             $table->timestamps();
         });

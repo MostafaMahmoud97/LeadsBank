@@ -13,6 +13,7 @@ class Client extends Model
     protected $fillable = [
         "id",
         "leads_bank_id",
+        "leads_id",
         "client_id",
         "name",
         "email",

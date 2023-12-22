@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class LeadsBank extends Model
 {
     use HasFactory,SoftDeletes;
 
     protected $table = "leads_bank";
+    protected $appends = ["price_x"];
 
     protected $fillable = [
         'lead_id',
@@ -81,5 +83,11 @@ class LeadsBank extends Model
         return $this->hasMany(Client::class,"leads_bank_id","id");
     }
 
+
+
+    public function getPriceXAttribute(){
+        $coin_price = config("coins_services.coins.coins_price"); // this main 1 coin = 1 $
+        return $this->transaction_type == "immediate" ? $this->price_percentage / $coin_price : $this->price_percentage;
+    }
 
 }

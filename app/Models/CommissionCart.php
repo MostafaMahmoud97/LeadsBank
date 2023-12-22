@@ -13,6 +13,7 @@ class CommissionCart extends Model
     protected $fillable = [
         "id",
         "leads_bank_id",
+        "is_take",
         "client_id"
     ];
 

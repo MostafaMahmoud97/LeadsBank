@@ -20,6 +20,6 @@ class LeadsBankResource extends JsonResource
             "last_name" => $this->last_name,
             "rate" => $this->rate,
             "transaction_type" => $this->transaction_type . ($this->transaction_type == "commission based" ? " | " .$this->commission_based ." | ". $this->commission_type : ""),
-            "price_percentage" => $this->transaction_type == "immediate" ? $this->price_percentage : ($this->transaction_type=="commission based" && $this->commission_based != "flat rate" ? $this->price_percentage." %" : $this->price_percentage),        ];
+            "price_percentage" => $this->transaction_type == "immediate" ? $this->price_x : ($this->transaction_type=="commission based" && $this->commission_based != "flat rate" ? $this->price_percentage." %" : $this->price_percentage),        ];
     }
 }

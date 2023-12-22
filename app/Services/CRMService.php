@@ -34,8 +34,7 @@ class CRMService
 
     public function GetLeadsBankBasedOnStateAndTransactionType($request){
         $Leads_bank_check = LeadsBank::select("id")
-            ->where(["state_id" => $request->state_id,"transaction_type" => $request->transaction_type])
-            ->where(["transaction_type"=>"commission based", "commission_type" => "shared"])
+            ->where(["state_id" => $request->state_id,"transaction_type"=>"commission based", "commission_type" => "shared"])
             ->withCount("Clients")->get();
 
         $leads_bank_ids = [];
@@ -47,14 +46,22 @@ class CRMService
         }
 
 
+
         $Leads_bank = LeadsBank::select("id","first_name","last_name","rate","transaction_type","commission_based","commission_type","price_percentage")
-        ->where(["state_id" => $request->state_id,"transaction_type" => $request->transaction_type])->orderBy("sort_status","ASC")
-            ->where(function ($q){
+        ->where(["state_id" => $request->state_id,"transaction_type" => $request->transaction_type])->orderBy("sort_status","ASC");
+
+        if ($request->transaction_type == "immediate"){
+            $Leads_bank = $Leads_bank->whereDoesntHave("Clients")->paginate(10);
+        }else{
+            $Leads_bank = $Leads_bank->where(function ($q) use ($leads_bank_ids){
                 $q->where(function ($q){
-                    $q->where("transaction_type","immediate")
-                        ->orWhere(["transaction_type"=>"commission based", "commission_type" => "exclusive"]);
-                })->whereDoesntHave("Clients");
-            })->whereNotIn("id",$leads_bank_ids)->paginate(10);
+                    $q->where("commission_type" , "exclusive")->whereDoesntHave("Clients");
+                })->OrWhere(function ($q) use ($leads_bank_ids){
+                    $q->where("commission_type" , "shared")->whereNotIn("id",$leads_bank_ids);
+                });
+            })->paginate(10);
+        }
+
 
         return LeadsBankPaginate::make($Leads_bank);
     }
@@ -68,9 +75,10 @@ class CRMService
         if($request->transaction_type == "immediate"){
 
             foreach ($Leads as $lead){
+                $clients = $lead->Clients;
                 $ImmediateCart = ImmediateCart::where("leads_bank_id",$lead->id)
                     ->where("client_id",$request->client_id)->first();
-                if (!$ImmediateCart){
+                if (!$ImmediateCart && count($clients) == 0){
                     ImmediateCart::create([
                         "client_id" => $request->client_id,
                         "leads_bank_id" => $lead->id,
@@ -81,9 +89,10 @@ class CRMService
         }elseif ($request->transaction_type == "commission based"){
 
             foreach ($Leads as $lead){
+                $clients = $lead->Clients;
                 $CommissionCart = CommissionCart::where("leads_bank_id",$lead->id)
                     ->where("client_id",$request->client_id)->first();
-                if (!$CommissionCart){
+                if (!$CommissionCart && (($lead->commission_type == "exclusive" && count($clients) == 0) || ($lead->commission_type == "shared" && count($clients) < 4))){
                     CommissionCart::create([
                         "client_id" => $request->client_id,
                         "leads_bank_id" => $lead->id
@@ -97,15 +106,15 @@ class CRMService
     }
 
     public function showLeadsDetailsInDashboard($client_id){
-        $ImmediateCartCount = ImmediateCart::where("client_id",$client_id)->get()->count();
-        $CommissionCartCount = CommissionCart::where("client_id",$client_id)->get()->count();
+        $ImmediateCartCount = ImmediateCart::where(["client_id"=>$client_id,"invoice_id"=>0])->get()->count();
+        $CommissionCartCount = CommissionCart::where(["client_id"=>$client_id,"is_take"=>0])->get()->count();
 
         $data = [
             [
-                "title" => "Immediate",
+                "title" => "immediate",
                 "number_leads" => $ImmediateCartCount
             ],[
-                "title" => "Commission Based",
+                "title" => "commission based",
                 "number_leads" => $CommissionCartCount
             ]
         ];
